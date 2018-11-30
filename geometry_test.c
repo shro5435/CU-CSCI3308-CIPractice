@@ -1,4 +1,4 @@
-/*
+/* Shania Roy
  * geometry_test.c
  * Andy Sayler
  * CSCI 3308
@@ -145,6 +145,42 @@ START_TEST(test_2d_midpoint)
 }
 END_TEST
 
+START_TEST(test_2d_area_triangle)
+{
+    coord_2d_t a;
+    coord_2d_t b;
+    coord_2d_t c;
+
+    //Test 1
+    a.x = 14.0;
+    a.y = 17.0;
+    b.x = 23.0;
+    b.y = 30.0;
+    c.x = 32.0;
+    c.y = 15.0;
+    ck_assert(coord_2d_area_triangle(&a, &b, &c) == 126.00);
+
+    //Test 2
+    a.x = 15.0;
+    a.y = 15.0;
+    b.x = 23.0;
+    b.y = 30.0;
+    c.x = 42.0;
+    c.y = 21.0;
+    ck_assert(coord_2d_area_triangle(&a, &b,&c) == 178.50);
+
+    //Test 3
+    a.x = 23.0;
+    a.y = 24.0;
+    b.x = 27.0;
+    b.y = 25.0;
+    c.x = 27.0;
+    c.y = 24.0;
+    ck_assert(coord_2d_area_triangle(&a, &b,&c) == 2.00);
+
+}
+END_TEST
+
 /* coord_2d Test Suite */
 Suite* coord_2d_suite(void)
 {
@@ -162,10 +198,14 @@ Suite* coord_2d_suite(void)
     TCase* tc_2d_midpoint = tcase_create("coord_2d_midpoint");
     tcase_add_test(tc_2d_midpoint, test_2d_midpoint);
 
+    TCase* tc_2d_area_triangle = tcase_create("coord_2d_area_triangle");
+    tcase_add_test(tc_2d_area_triangle, test_2d_area_triangle);
+
     /* Add Cases to Suite */
     suite_add_tcase(s, tc_2d_eq);
     suite_add_tcase(s, tc_2d_dist);
     suite_add_tcase(s, tc_2d_midpoint);
+    suite_add_tcase(s, tc_2d_area_triangle);
 
     /* Return Suite */
     return s;

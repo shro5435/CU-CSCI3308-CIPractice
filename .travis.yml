@@ -1,0 +1,8 @@
+#Shania Roy 
+#Build fails at 'make dep' if sudo apt-get install pkg-config is not added
+
+install: sudo apt-get install pkg-config
+sudo: required
+language: c
+compiler: gcc
+script: make dep && make && make test
